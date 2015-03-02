@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Memento</string>
+
+    <string name="time_start">Time to start sending notifications:</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_select_time">Select Time</string>
+    <string name="time_stop">Time to stop sending notifications:</string>
+    <string name="button_add_time">Add Notification</string>
+</resources>

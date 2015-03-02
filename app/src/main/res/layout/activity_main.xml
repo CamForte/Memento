@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_start"
+        android:id="@+id/timeStart"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSelectTimeStart"
+        android:layout_below="@+id/timeStart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/button_select_time" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/timeSelectedStart"
+        android:layout_below="@+id/timeStart"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/btnSelectTimeStart" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/timeStop"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/btnSelectTimeStart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/time_stop" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_select_time"
+        android:id="@+id/btnSelectTimeStop"
+        android:layout_below="@+id/timeStop"
+        android:layout_alignRight="@+id/btnSelectTimeStart"
+        android:layout_alignEnd="@+id/btnSelectTimeStart" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/timeSelectedStop"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/btnSelectTimeStop" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_add_time"
+        android:id="@+id/btnAddTime"
+        android:layout_below="@+id/btnSelectTimeStop"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="42dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/btnAddTime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationList">
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
