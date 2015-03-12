@@ -1,16 +1,13 @@
 package com.camforte.memento;
 
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 public class NotificationTextView extends TextView{

@@ -36,6 +36,7 @@ public class MementoNotifierService extends Service {
 
     public static boolean running = false;
     private boolean ttsRunning = false;
+    private boolean ttsError = false;
 
     public MementoNotifierService() {
         super();
@@ -52,6 +53,7 @@ public class MementoNotifierService extends Service {
                 loadInfo();
                 timer = new Timer();
                 if(notifications.size() == 0) {
+                    Log.d("MementoNotifierService", "No notifications. Service not running.");
                     return;
                 }
                 timer.schedule(new MessageLoop(), 0, (long)(((double)((stopHour*60 + stopMinute) - (startHour*60 + startMinute))/(double)notifications.size())*1000*60));
@@ -68,10 +70,12 @@ public class MementoNotifierService extends Service {
                     tts.setLanguage(Locale.US);
                     ttsRunning = true;
                 } else {
+                    ttsError = true;
                     Log.d("MementoNotifierService", "Error setting up TTS");
                 }
             }
         });
+        Log.d("MementoNotifierService", "Service started.");
     }
 
     @Override
@@ -85,6 +89,7 @@ public class MementoNotifierService extends Service {
             tts.shutdown();
             ttsRunning = false;
         }
+        Log.d("MementoNotifierService", "Service stopped.");
     }
 
     @Override
@@ -101,7 +106,7 @@ public class MementoNotifierService extends Service {
         stopMinute = Integer.parseInt(bufferedReader.readLine());
 
         String whatever;
-        while((whatever = bufferedReader.readLine())!=null){
+        while((whatever = bufferedReader.readLine())!=null) {
             notifications.add(whatever);
         }
         bufferedReader.close();
@@ -125,6 +130,10 @@ public class MementoNotifierService extends Service {
                 return;
             }
             String notification = notifications.get(lastIndex++);
+
+            if(ttsError) {
+                return;
+            }
 
             while(!ttsRunning);
             tts.speak(notification, TextToSpeech.QUEUE_FLUSH, null);

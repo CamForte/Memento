@@ -3,18 +3,21 @@ package com.camforte.memento;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             try {
                 loadInfo();
             } catch (IOException e) {
@@ -161,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
             if (v == btnAddTime) {
                 final AlertDialog.Builder alertDia = new AlertDialog.Builder(MainActivity.this);
                 alertDia.setTitle("Add Notification");
-                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(MainActivity.this, R.style.Theme_AppCompat_Light_Dialog));
                 View view = inflater.inflate(R.layout.dialog_text, null);
                 final EditText editText = (EditText)view.findViewById(R.id.notificationTextEdit);
                 alertDia.setView(view);
@@ -169,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         NotificationTextView notificationTextView = new NotificationTextView(MainActivity.this);
-                        notificationTextView.setText(editText.getText());
+                        notificationTextView.setText(editText.getText().toString());
                         notificationList.addView(notificationTextView);
                         restartService();
                     }
@@ -195,6 +198,7 @@ public class MainActivity extends ActionBarActivity {
         try {
             saveInfo();
             if(MementoNotifierService.running) {
+                Log.d("MementoMainActivity", "Service stopping.");
                 stopService(new Intent(MainActivity.this, MementoNotifierService.class));
             }
             Intent notifierServiceIntent = new Intent(MainActivity.this, MementoNotifierService.class);
